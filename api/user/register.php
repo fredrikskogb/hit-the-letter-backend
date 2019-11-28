@@ -11,11 +11,13 @@ $db = $database->getConnection();
  
 $user = new User($db);
  
+$data = json_decode(file_get_contents("php://input"));
+
 // set user property values
-$user->email = $_GET['email'];
-$user->password = base64_encode($_GET['password']);
-$user->created = date('Y-m-d H:i:s');
- 
+$user->email = $data->email;
+$user->password = password_hash($data->password, PASSWORD_DEFAULT);
+$user->created = date('Y-m-d H:i:s'); 
+
 // create the user
 if($user->signup()){
     $user_arr=array(

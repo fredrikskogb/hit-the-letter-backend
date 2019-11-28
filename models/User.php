@@ -51,9 +51,10 @@ class User{
     }
     // login user
     function login(){
+
         // select all query
         $query = "SELECT
-                    `id`, `email`, `password`, `created`
+                    *
                 FROM
                     " . $this->table_name . " 
                 WHERE
@@ -62,8 +63,24 @@ class User{
         $stmt = $this->conn->prepare($query);
         // execute query
         $stmt->execute();
+        
         return $stmt;
     }
+
+    function getPassword() {
+        $statement =  $this->conn->prepare("SELECT password FROM users WHERE email = :email");
+        
+        $statement->execute(
+            [
+                ":email" => $this->email
+            ]
+        );
+
+        $fetched_password = $statement->fetch();
+
+        return $fetched_password["password"];
+    }
+
     function isAlreadyExist(){
         $query = "SELECT *
             FROM
