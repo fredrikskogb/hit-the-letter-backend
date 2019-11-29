@@ -9,9 +9,16 @@ $db = $database->getConnection();
  
 // prepare user object
 $user = new User($db);
+
+$data = json_decode(file_get_contents("php://input"));
+
 // set ID property of user to be edited
-$user->email = isset($_GET['email']) ? $_GET['email'] : die();
-$user->password = base64_encode(isset($_GET['password']) ? $_GET['password'] : die());
+$user->email = $data->email;
+
+if(password_verify($data->password, $user->getPassword())){
+    $user->password = $user->getPassword();
+}
+
 // read the details of user to be edited
 $stmt = $user->login();
 if($stmt->rowCount() > 0){
