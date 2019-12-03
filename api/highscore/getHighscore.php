@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
 // include database and object files
 include_once '../../configuration/Database.php';
 include_once '../../models/Highscore.php';
