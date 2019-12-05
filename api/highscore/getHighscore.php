@@ -10,21 +10,18 @@ $db = $database->getConnection();
 // prepare user object
 $highscore = new Highscore($db);
 
-$data = json_decode(file_get_contents("php://input"));
-
 // set ID property of user to be edited
-$highscore->user_id = $data->userId;
-$highscore->level = $data->level;
-$highscore->points = $data->points;
+$highscore->user_id = $_GET["userId"];
 
 if($highscore->getHighscore()){
     // get retrieved row
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $row = $highscore->getHighscore()->fetch(PDO::FETCH_ASSOC);
     // create array
     $highscore_arr=array(
         "status" => true,
-        "id" => $row['user_id'],
-        "email" => $row['points']
+        "id" => $row["user_id"],
+        "points" => $row["points"],
+        "level" => $row["level"]
     );
 }
 else{
