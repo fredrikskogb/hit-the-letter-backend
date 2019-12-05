@@ -12,12 +12,10 @@ $db = $database->getConnection();
 // prepare user object
 $user = new User($db);
 
-$data = json_decode(file_get_contents("php://input"));
-
 // set ID property of user to be edited
-$user->email = $data->email;
+$user->email = $_GET["email"];
 
-if(password_verify($data->password, $user->getPassword())){
+if(password_verify($_GET["password"], $user->getPassword())){
     $user->password = $user->getPassword();
 }
 
@@ -28,10 +26,10 @@ if($stmt->rowCount() > 0){
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     // create array
     $user_arr=array(
-        "status" => true,
-        "message" => "Successfully Login!",
         "id" => $row['id'],
-        "email" => $row['email']
+        "email" => $row['email'],
+        "username" => $row["username"],
+        "password" => $row["password"]
     );
 }
 else{

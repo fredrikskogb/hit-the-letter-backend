@@ -26,10 +26,11 @@ $user->created = date('Y-m-d H:i:s');
 // create the user
 if($user->signup()){
     $user_arr=array(
-        "status" => true,
-        "message" => "Successfully Signup!",
         "id" => $user->id,
-        "email" => $user->email
+        "email" => $user->email,
+        "username" => $user->username,
+        "password" => $user->password
+
     );
 }
 else{
