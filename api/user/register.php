@@ -15,6 +15,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 // set user property values
 $user->email = $data->email;
+$user->username = $data->username;
 $user->password = password_hash($data->password, PASSWORD_DEFAULT);
 $user->created = date('Y-m-d H:i:s'); 
 
