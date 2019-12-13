@@ -65,6 +65,26 @@ class Highscore{
 
     }
 
+    function getAllHighscores(){
+
+      // select all query
+      $query = "SELECT
+                  highscore.points, highscore.level, users.username
+              FROM
+                  " . $this->table_name . "
+              JOIN
+              users ON highscore.user_id=users.id
+              ORDER BY
+              highscore.points DESC";
+      // prepare query statement
+      $stmt = $this->conn->prepare($query);
+      // execute query
+      $stmt->execute();
+      
+      return $stmt;
+
+    }
+
     public function updateHighscore() {
       // Create query
       $query = 'UPDATE ' . $this->table_name . '
