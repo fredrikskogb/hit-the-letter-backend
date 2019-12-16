@@ -28,8 +28,7 @@ if($stmt->rowCount() > 0){
     $user_arr=array(
         "id" => $row['id'],
         "email" => $row['email'],
-        "username" => $row["username"],
-        "password" => $row["password"]
+        "username" => $row["username"]
     );
 }
 else{
