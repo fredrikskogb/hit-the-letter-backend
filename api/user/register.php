@@ -28,9 +28,7 @@ if($user->signup()){
     $user_arr=array(
         "id" => $user->id,
         "email" => $user->email,
-        "username" => $user->username,
-        "password" => $user->password
-
+        "username" => $user->username
     );
 }
 else{
