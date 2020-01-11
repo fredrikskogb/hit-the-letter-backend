@@ -34,7 +34,7 @@ if($user->signup()){
 else{
     $user_arr=array(
         "status" => false,
-        "message" => "Email already exists!"
+        "message" => "Email or username already exists!"
     );
 }
 print_r(json_encode($user_arr));
