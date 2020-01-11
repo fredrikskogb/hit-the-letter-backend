@@ -13,7 +13,7 @@ $db = $database->getConnection();
 $user = new User($db);
 
 // set ID property of user to be edited
-$user->email = $_GET["email"];
+$user->username = $_GET["username"];
 
 if(password_verify($_GET["password"], $user->getPassword())){
     $user->password = $user->getPassword();
@@ -34,7 +34,7 @@ if($stmt->rowCount() > 0){
 else{
     $user_arr=array(
         "status" => false,
-        "message" => "Invalid email or Password!",
+        "message" => "Invalid username or Password!",
     );
 }
 // make it json format

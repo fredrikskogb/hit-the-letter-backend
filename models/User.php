@@ -61,7 +61,7 @@ class User{
                 FROM
                     " . $this->table_name . " 
                 WHERE
-                    email='".$this->email."' AND password='".$this->password."'";
+                    username='".$this->username."' AND password='".$this->password."'";
         // prepare query statement
         $stmt = $this->conn->prepare($query);
         // execute query
@@ -71,11 +71,11 @@ class User{
     }
 
     function getPassword() {
-        $statement =  $this->conn->prepare("SELECT password FROM users WHERE email = :email");
+        $statement =  $this->conn->prepare("SELECT password FROM users WHERE username = :username");
         
         $statement->execute(
             [
-                ":email" => $this->email
+                ":username" => $this->username
             ]
         );
 
