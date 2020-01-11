@@ -85,15 +85,16 @@ class User{
     }
 
     function isAlreadyExist(){
-        $query = "SELECT *
-            FROM
-                " . $this->table_name . " 
-            WHERE
-                email='".$this->email."'";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE email=:email OR username=:username";
         // prepare query statement
         $stmt = $this->conn->prepare($query);
         // execute query
-        $stmt->execute();
+        $stmt->execute(
+            [
+                ":email" => $this->email,
+                ":username" => $this->username
+            ]
+        );
         if($stmt->rowCount() > 0){
             return true;
         }
